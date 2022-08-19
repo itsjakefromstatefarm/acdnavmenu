@@ -8,9 +8,56 @@
     <title>JSDev</title>
   </head>
   <body>
-    <h1>Alright. You're set.</h1>
-    <h2>Now build something amazing!</h2>
-    <button type="button">Click Me!</button>
+    <div class="container h-screen flex flex-col items-center justify-center bg-gray-100">
+      <!-- Card -->
+      <div class="bg-white w-2/5 rounded-xl shadow-2xl shadow-slate-200 overflow-hidden">
+
+        <!-- Image -->
+        <div class="w-full flex justify-center">
+          <img class="h-full w-full rounded-t-xl overflow-hidden object-cover" src="./img/acd_tailwind_bg.png" alt="">
+        </div>
+
+        <!-- Heading -->
+        <div class="w-full p-4">
+          <h2 class="font-bold text-xl">Tailwind Starter Kit</h2>
+          <h5 class="text-xs text-gray-400">Jake Johnson, 2022</h5>
+          
+          <!-- Description -->
+          <p class="text-sm text-gray-600 my-2">This file contains everything you need to get started using the JS in FM Dev Environment with Tailwind CSS. To learn more about this file, JS in FM, or Tailwind, use the links below.</p>
+        </div>
+
+        <!-- Buttons -->
+        <div class="grid grid-cols-3 gap-4 w-full px-4 mb-4">
+          <a 
+            href="https://github.com/itsjakefromstatefarm/acdtailwind_starter"
+            target="blank"
+            role="button"
+            class="p-4 text-white border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-lg text-center"
+          >
+            Go to File Repo
+          </a>
+
+          <a 
+          href="https://www.jsinfm.com/"
+          target="blank"
+          role="button"
+          class="p-4 text-gray-500 border border-gray-500 rounded-lg text-center hover:bg-gray-500 hover:text-white"
+          >
+            JS in FM
+          </a>
+
+          <a 
+          href="https://tailwindcss.com/"
+          target="blank"
+          role="button"
+          class="p-4 text-violet-500 border border-violet-500 rounded-lg text-center hover:bg-violet-500 hover:text-white"
+          >
+            Tailwind CSS
+          </a>
+        </div>
+
+      </div>
+    </div>
 
     <script type="module">
       import "./src/index.js";
