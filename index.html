@@ -5,58 +5,16 @@
     <style>
       @import "./src/style.css";
     </style>
-    <title>JSDev</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <title>ACD Nav Menu</title>
   </head>
-  <body>
-    <div class="container h-screen flex flex-col items-center justify-center bg-gray-100">
-      <!-- Card -->
-      <div class="bg-white w-2/5 rounded-xl shadow-2xl shadow-slate-200 overflow-hidden">
+  <body class="flex justify-center bg-indigo-900">
 
-        <!-- Image -->
-        <div class="w-full flex justify-center">
-          <img class="h-full w-full rounded-t-xl overflow-hidden object-cover" src="./img/acd_tailwind_bg.png" alt="">
-        </div>
-
-        <!-- Heading -->
-        <div class="w-full p-4">
-          <h2 class="font-bold text-xl">Tailwind Starter Kit</h2>
-          <h5 class="text-xs text-gray-400">Jake Johnson, 2022</h5>
-          
-          <!-- Description -->
-          <p class="text-sm text-gray-600 my-2">This file contains everything you need to get started using the JS in FM Dev Environment with Tailwind CSS. To learn more about this file, JS in FM, or Tailwind, use the links below.</p>
-        </div>
-
-        <!-- Buttons -->
-        <div class="grid grid-cols-3 gap-4 w-full px-4 mb-4">
-          <a 
-            href="https://github.com/itsjakefromstatefarm/acdtailwind_starter"
-            target="blank"
-            role="button"
-            class="p-4 text-white bg-blue-100 text-blue-500 hover:bg-blue-500 hover:text-white hover:cursor-pointer rounded-lg text-center"
-          >
-            Go to File Repo
-          </a>
-
-          <a 
-          href="https://www.jsinfm.com/"
-          target="blank"
-          role="button"
-          class="p-4 text-gray-500 bg-gray-100 rounded-lg text-center hover:bg-gray-500 hover:text-white hover:cursor-pointer"
-          >
-            JS in FM
-          </a>
-
-          <a 
-          href="https://tailwindcss.com/"
-          target="blank"
-          role="button"
-          class="p-4 text-violet-500 bg-violet-100 rounded-lg text-center hover:bg-violet-500 hover:text-white hover:cursor-pointer"
-          >
-            Tailwind CSS
-          </a>
-        </div>
-
-      </div>
+    <div class="flex container p-4 max-w-xs">
+      <ul id="navMenu" class="grid gap-2 w-full">
+        
+      </ul>
     </div>
 
     <script type="module">
@@ -64,3 +22,51 @@
     </script>
   </body>
 </html>
+
+
+<!-- Old Example HTML -->
+
+<!-- <li id="dashboard" class="nav flex rounded-xl w-full p-3 hover:bg-indigo-800 hover:cursor-pointer items-center gap-4">
+          <i class="ri-dashboard-fill text-white text-xl pointer-events-none"></i>
+          <p 
+            class="text-white font-[Poppins] pointer-events-none"
+          >
+            Dashboard
+          </p> 
+        </li>
+
+        <li id="company" class="nav flex rounded-xl w-full p-3 hover:bg-indigo-800 hover:cursor-pointer items-center gap-4">
+          <i class="ri-briefcase-fill text-white text-xl pointer-events-none"></i>
+          <p 
+            class="text-white font-[Poppins] pointer-events-none"
+          >
+            Company
+          </p> 
+        </li>
+
+        <li id="contact" class="nav flex rounded-xl w-full p-3 hover:bg-indigo-800 hover:cursor-pointer items-center gap-4">
+          <i class="ri-user-fill text-white text-xl pointer-events-none"></i>
+          <p 
+            class="text-white font-[Poppins] pointer-events-none"
+          >
+            Contact
+          </p> 
+        </li>
+
+        <li id="project" class="nav flex rounded-xl w-full p-3 hover:bg-indigo-800 hover:cursor-pointer items-center gap-4">
+          <i class="ri-hammer-fill text-white text-xl pointer-events-none"></i>
+          <p 
+            class="text-white font-[Poppins] pointer-events-none"
+          >
+            Project
+          </p> 
+        </li>
+
+        <li id="timeCard" class="nav flex rounded-xl w-full p-3 hover:bg-indigo-800 hover:cursor-pointer items-center gap-4">
+          <i class="ri-timer-fill text-white text-xl pointer-events-none"></i>
+          <p 
+            class="text-white font-[Poppins] pointer-events-none"
+          >
+            Time Card
+          </p> 
+        </li> -->
