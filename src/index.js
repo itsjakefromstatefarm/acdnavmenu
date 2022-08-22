@@ -85,9 +85,11 @@ navModules.forEach(module => {
 });
 
 $('.nav').on('click', function(e) {
-  const hasChildren = $(this).attr('hasChildren');
   const id = e.target.id;
+  const hasChildren = $(this).attr('hasChildren');
+  const parents = $(this).attr('parents').toString().split(', ');
+
   if (hasChildren === 'true') {
-    console.log('Here is where we will do our logic.');
+    // console.log($('[data-contact]'));
   };
 });
