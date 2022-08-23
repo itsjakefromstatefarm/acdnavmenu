@@ -1,55 +1,71 @@
+import { getModules, buildElement } from "../helpers/helpers";
+const _ = require('lodash/collection');
+
 const navModules = [
   {
     label: 'Dashboard',
     id: 'dashboard',
     icon: 'ri-dashboard-line',
+    parent: '',
     hasChildren: false,
-    parents: ''
+    children: ''
   },
   {
     label: 'Company',
     id: 'company',
     icon: 'ri-briefcase-line',
+    parent: '',
     hasChildren: false,
-    parents: ''
+    children: ''
   },
   {
     label: 'Contact',
     id: 'contact',
     icon: 'ri-user-line',
+    parent: '',
     hasChildren: true,
-    parents: ''
-  },
-  {
-    label: 'Recently Viewed',
-    id: 'recentlyViewed',
-    icon: '',
-    hasChildren: false,
-    parents: [
-      'contact',
-      'mega'
+    children: [
+      {
+        label: 'Recently Viewed',
+        id: 'recentlyViewed',
+        icon: '',
+        parent: 'contact',
+        hasChildren: false,
+        children: ''
+      },
+      {
+        label: 'My Favorites',
+        id: 'myFavorites',
+        icon: '',
+        parent: 'contact',
+        hasChildren: false,
+        children: ''
+      },
     ]
   },
   {
     label: 'Project',
     id: 'project',
     icon: 'ri-hammer-line',
+    parent: '',
     hasChildren: false,
-    parents: ''
+    children: ''
   },
   {
     label: 'Order',
     id: 'order',
     icon: 'ri-shopping-basket-2-line',
+    parent: '',
     hasChildren: false,
-    parents: ''
+    children: ''
   },
   {
     label: 'Time Card',
     id: 'timeCard',
     icon: 'ri-timer-line',
+    parent: '',
     hasChildren: false,
-    parents: ''
+    children: ''
   },
 ];
 
@@ -58,38 +74,56 @@ const iClass = 'text-white text-xl pointer-events-none';
 const pClass = 'text-white font-[Poppins] pointer-events-none';
 
 let navMenu = document.getElementById('navMenu');
+
+const flattened = _.flatMapDeep(navModules, getModules);
+console.log(flattened);
+
 navModules.forEach(module => {
-  const { label, id, icon, hasChildren, parents } = module;
-
-  const li = document.createElement('li');
-  li.id = id;
-  $(li).addClass(liClass);
-  $(li).attr('hasChildren', hasChildren);
-  $(li).attr('parents', parents);
-
-  const i = document.createElement('i');
-  $(i).addClass(`${icon} ${iClass}`);
+  const { label, id, icon, hasChildren, children } = module;
   
-  const p = document.createElement('p');
-  p.innerText = label;
-  $(p).addClass(pClass);
+  const li = buildElement(
+    '<li>', 
+    {
+      id: id,
+      withClass: liClass,
+      data: [
+        {
+          'id': id,
+          'hasChildren': hasChildren,
+          'children': children
+        }
+      ]
+    }
+  );
 
-  if (!icon) {
-    $(p).addClass('pl-10 text-indigo-200');
-  }
-  
-  li.appendChild(i);
-  li.appendChild(p);
+  const i = buildElement(
+    '<i>', 
+    {
+      withClass: iClass,
+      icon: icon,
+    }
+  );
 
-  navMenu.appendChild(li);
-});
+  const p = buildElement(
+    '<p>',
+    {
+      withClass: `${pClass} ${!icon && 'pl-10 text-indigo-200'}`,
+      text: label,
+    }
+  )
+
+  $(li).append(i);
+  $(li).append(p);
+
+  $(navMenu).append(li);
+
+  // if (hasChildren) {
+  //   children.forEach(child => {
+  //     console.log(child);
+  //   });
+  // };
+})
 
 $('.nav').on('click', function(e) {
-  const id = e.target.id;
-  const hasChildren = $(this).attr('hasChildren');
-  const parents = $(this).attr('parents').toString().split(', ');
-
-  if (hasChildren === 'true') {
-    // console.log($('[data-contact]'));
-  };
+  console.log($(this).data());
 });
