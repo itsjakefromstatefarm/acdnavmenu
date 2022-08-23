@@ -1,3 +1,4 @@
+import { liClass, iClass, pClass } from "../helpers/classes";
 import { getModules, buildElement } from "../helpers/helpers";
 const _ = require('lodash/collection');
 
@@ -30,8 +31,25 @@ const navModules = [
         id: 'recentlyViewed',
         icon: '',
         parent: 'contact',
-        hasChildren: false,
-        children: ''
+        hasChildren: true,
+        children: [
+          {
+            label: 'Today',
+            id: 'today',
+            icon: '',
+            parent: 'recentlyViewed',
+            hasChildren: false,
+            children: ''
+          },
+          {
+            label: 'This Week',
+            id: 'thisWeek',
+            icon: '',
+            parent: 'recentlyViewed',
+            hasChildren: false,
+            children: ''
+          },
+        ]
       },
       {
         label: 'My Favorites',
@@ -68,10 +86,6 @@ const navModules = [
     children: ''
   },
 ];
-
-const liClass = 'nav flex rounded-xl w-full h-14 p-3 items-center gap-4 hover:bg-indigo-800 hover:cursor-pointer';
-const iClass = 'text-white text-xl pointer-events-none';
-const pClass = 'text-white font-[Poppins] pointer-events-none';
 
 let navMenu = document.getElementById('navMenu');
 
