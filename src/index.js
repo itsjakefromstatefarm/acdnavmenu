@@ -1,7 +1,11 @@
-import { liClass, iClass, pClass } from "../helpers/classes";
+// import { liClass, iClass, pClass } from "../helpers/classes";
 import { getModules, buildElement } from "../helpers/helpers";
 import { navModules } from "../helpers/exampleData";
 const _ = require('lodash/collection');
+
+const liClass = 'nav grid grid-cols-6 h-14 rounded-xl w-full items-center p-3 hover:bg-indigo-800 hover:cursor-pointer';
+const iClass = 'text-white text-xl col-span-1 pointer-events-none justify-self-center';
+const pClass = 'text-white font-[Poppins] col-span-4 pointer-events-none';
 
 const modules = _.flatMapDeep(navModules, getModules);
 
@@ -47,7 +51,7 @@ const moduleElements = modules.map(el => {
       ]
     }
   );
-
+  
   const i = buildElement(
     '<i>', 
     {
@@ -64,7 +68,7 @@ const moduleElements = modules.map(el => {
     }
   );
 
-  const chevron = hasChildren ? buildElement('<i>', {id: `${id}-chevron`, withClass: iClass, icon: 'ri-arrow-down-s-line'}) : null;
+  const chevron = hasChildren ? buildElement('<i>', {id: `${id}-chevron`, withClass: iClass, icon: 'ri-arrow-down-s-line transition'}) : null;
 
   $(li).append([i, p, chevron && chevron]);
 
@@ -93,5 +97,12 @@ moduleElements.forEach(module => {
 $('.nav').on('click', function(e) {
   console.log($(this).data()[0]);
   const { id, hasChildren } = $(this).data()[0];
-  hasChildren && $(`#${id}-children`).toggleClass('hidden');
+  if ( hasChildren ) {
+    $(`#${id}-children`).toggleClass('hidden');
+    // const chevronClass = $(`#${id}-chevron`).attr('class');
+    // const classToRemove = chevronClass.includes('ri-arrow-down-s-line') ? 'ri-arrow-down-s-line' : 'ri-arrow-up-s-line';
+    // const classToAdd = classToRemove === 'ri-arrow-down-s-line' ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line';
+    // $(`#${id}-chevron`).removeClass(classToRemove).addClass(classToAdd);
+    $(`#${id}-chevron`).toggleClass('rotate-180');
+  }
 });

@@ -76,7 +76,7 @@ export const navModules = [
         id: 'recentOrders',
         icon: '',
         parent: 'order',
-        hasChildren: true,
+        hasChildren: false,
         children: ''
       },
     ]
