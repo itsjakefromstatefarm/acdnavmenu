@@ -17,6 +17,7 @@ const childDivs = parents.map(parent => {
     '<div>',
     {
       id: `${parent}-children`,
+      withClass: 'hidden',
       data: {
         'id': parent,
         'withClass': 'bg-red-500 h-14'
