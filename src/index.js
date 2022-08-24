@@ -63,7 +63,10 @@ const moduleElements = modules.map(el => {
       text: label,
     }
   );
-  $(li).append([i, p]);
+
+  const chevron = hasChildren ? buildElement('<i>', {id: `${id}-chevron`, withClass: iClass, icon: 'ri-arrow-down-s-line'}) : null;
+
+  $(li).append([i, p, chevron && chevron]);
 
   return li;
 });
