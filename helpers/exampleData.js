@@ -64,6 +64,14 @@ export const navModules = [
     hasChildren: true,
     children: [
       {
+        label: 'All',
+        id: 'allOrders',
+        icon: '',
+        parent: 'order',
+        hasChildren: false,
+        children: ''
+      },
+      {
         label: 'Recent Orders',
         id: 'recentOrders',
         icon: '',
