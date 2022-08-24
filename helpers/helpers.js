@@ -17,16 +17,17 @@ const getModules = (mod) => {
 const buildElement = (type, options) => {
   const { id, withClass, icon, text } = options;
   
-  const element = $(type).addClass(`${icon && icon} ${withClass}`);
+  const element = $(type);
+  if (withClass) {
+    element.addClass(`${icon ? icon + " " : ''}${withClass}`);
+  };
   $(element).attr('id', id);
   $(element).text(text);
 
   if (options.data) {
-    options.data.forEach(optionSet => {
-      for (key in optionSet) {
-        $(element).data(key, optionSet[key]);
-      }
-    })
+    for (key in options.data) {
+      $(element).data(key, options.data[key]);
+    }
   };
 
   return element;

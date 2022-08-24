@@ -1,100 +1,36 @@
 import { liClass, iClass, pClass } from "../helpers/classes";
 import { getModules, buildElement } from "../helpers/helpers";
+import { navModules } from "../helpers/exampleData";
 const _ = require('lodash/collection');
 
-const navModules = [
-  {
-    label: 'Dashboard',
-    id: 'dashboard',
-    icon: 'ri-dashboard-line',
-    parent: '',
-    hasChildren: false,
-    children: ''
-  },
-  {
-    label: 'Company',
-    id: 'company',
-    icon: 'ri-briefcase-line',
-    parent: '',
-    hasChildren: false,
-    children: ''
-  },
-  {
-    label: 'Contact',
-    id: 'contact',
-    icon: 'ri-user-line',
-    parent: '',
-    hasChildren: true,
-    children: [
-      {
-        label: 'Recently Viewed',
-        id: 'recentlyViewed',
-        icon: '',
-        parent: 'contact',
-        hasChildren: true,
-        children: [
-          {
-            label: 'Today',
-            id: 'today',
-            icon: '',
-            parent: 'recentlyViewed',
-            hasChildren: false,
-            children: ''
-          },
-          {
-            label: 'This Week',
-            id: 'thisWeek',
-            icon: '',
-            parent: 'recentlyViewed',
-            hasChildren: false,
-            children: ''
-          },
-        ]
-      },
-      {
-        label: 'My Favorites',
-        id: 'myFavorites',
-        icon: '',
-        parent: 'contact',
-        hasChildren: false,
-        children: ''
-      },
-    ]
-  },
-  {
-    label: 'Project',
-    id: 'project',
-    icon: 'ri-hammer-line',
-    parent: '',
-    hasChildren: false,
-    children: ''
-  },
-  {
-    label: 'Order',
-    id: 'order',
-    icon: 'ri-shopping-basket-2-line',
-    parent: '',
-    hasChildren: false,
-    children: ''
-  },
-  {
-    label: 'Time Card',
-    id: 'timeCard',
-    icon: 'ri-timer-line',
-    parent: '',
-    hasChildren: false,
-    children: ''
-  },
-];
+const modules = _.flatMapDeep(navModules, getModules);
 
-let navMenu = document.getElementById('navMenu');
+const allParents = modules.filter(module => {
+  return module.parent;
+}).map(module => {
+  return module.parent;
+});
+const parents = [...new Set(allParents)];
 
-const flattened = _.flatMapDeep(navModules, getModules);
-console.log(flattened);
+const childDivs = parents.map(parent => {
+  const div = buildElement(
+    '<div>',
+    {
+      id: `${parent}-children`,
+      data: {
+        'id': parent,
+        'withClass': 'bg-red-500 h-14'
+      }
+    }
+  )
+  return {
+    id: `${parent}-children`,
+    div: div 
+  };
+});
 
-navModules.forEach(module => {
-  const { label, id, icon, hasChildren, children } = module;
-  
+const moduleElements = modules.map(el => {
+  const { label, id, icon, parent, hasChildren, children } = el;
   const li = buildElement(
     '<li>', 
     {
@@ -103,6 +39,7 @@ navModules.forEach(module => {
       data: [
         {
           'id': id,
+          'parent': parent,
           'hasChildren': hasChildren,
           'children': children
         }
@@ -121,23 +58,36 @@ navModules.forEach(module => {
   const p = buildElement(
     '<p>',
     {
-      withClass: `${pClass} ${!icon && 'pl-10 text-indigo-200'}`,
+      withClass: `${pClass} ${parent && 'pl-9 text-indigo-200 text-sm'}`,
       text: label,
     }
-  )
+  );
+  $(li).append([i, p]);
 
-  $(li).append(i);
-  $(li).append(p);
+  return li;
+});
 
-  $(navMenu).append(li);
+let navMenu = document.getElementById('navMenu');
 
-  // if (hasChildren) {
-  //   children.forEach(child => {
-  //     console.log(child);
-  //   });
-  // };
-})
+moduleElements.forEach(module => {
+  const { id, parent, hasChildren } = $(module).data()[0];
+
+  if (!parent) {
+    $(navMenu).append(module);
+  } else{
+    
+    const childDiv = childDivs.filter(div => {
+      return div.id === `${parent}-children`
+    });
+    console.log(childDiv[0].div[0]);
+    $(`#${parent}-children`).length === 0 && $(navMenu).append(childDiv[0].div[0]);
+    $(`#${parent}-children`).append(module);
+  };
+
+});
 
 $('.nav').on('click', function(e) {
-  console.log($(this).data());
+  console.log($(this).data()[0]);
+  const { id, hasChildren } = $(this).data()[0];
+  hasChildren && $(`#${id}-children`).toggleClass('hidden');
 });
