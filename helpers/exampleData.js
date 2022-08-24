@@ -23,11 +23,19 @@ export const navModules = [
     hasChildren: true,
     children: [
       {
+        label: 'All',
+        id: 'allContacts',
+        icon: '',
+        parent: 'contact',
+        hasChildren: false,
+        children: ''
+      },
+      {
         label: 'Recently Viewed',
         id: 'recentlyViewed',
         icon: '',
         parent: 'contact',
-        hasChildren: true,
+        hasChildren: false,
         children: ''
       },
       {
