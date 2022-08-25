@@ -5,15 +5,13 @@ export const navModules = [
     icon: 'ri-dashboard-line',
     parent: '',
     hasChildren: false,
-    children: ''
   },
   {
     label: 'Company',
     id: 'company',
     icon: 'ri-briefcase-line',
     parent: '',
-    hasChildren: false,
-    children: ''
+    hasChildren: true,
   },
   {
     label: 'Contact',
@@ -21,32 +19,20 @@ export const navModules = [
     icon: 'ri-user-line',
     parent: '',
     hasChildren: true,
-    children: [
-      {
-        label: 'All',
-        id: 'allContacts',
-        icon: '',
-        parent: 'contact',
-        hasChildren: false,
-        children: ''
-      },
-      {
-        label: 'Recently Viewed',
-        id: 'recentlyViewed',
-        icon: '',
-        parent: 'contact',
-        hasChildren: false,
-        children: ''
-      },
-      {
-        label: 'My Favorites',
-        id: 'myFavorites',
-        icon: '',
-        parent: 'contact',
-        hasChildren: false,
-        children: ''
-      },
-    ]
+  },
+  {
+    label: 'Recently Viewed',
+    id: 'recentlyViewed',
+    icon: '',
+    parent: 'contact',
+    hasChildren: false,
+  },
+  {
+    label: 'My Favorites',
+    id: 'myFavorites',
+    icon: '',
+    parent: 'contact',
+    hasChildren: false,
   },
   {
     label: 'Project',
@@ -54,7 +40,6 @@ export const navModules = [
     icon: 'ri-hammer-line',
     parent: '',
     hasChildren: false,
-    children: ''
   },
   {
     label: 'Order',
@@ -62,24 +47,6 @@ export const navModules = [
     icon: 'ri-shopping-basket-2-line',
     parent: '',
     hasChildren: true,
-    children: [
-      {
-        label: 'All',
-        id: 'allOrders',
-        icon: '',
-        parent: 'order',
-        hasChildren: false,
-        children: ''
-      },
-      {
-        label: 'Recent Orders',
-        id: 'recentOrders',
-        icon: '',
-        parent: 'order',
-        hasChildren: false,
-        children: ''
-      },
-    ]
   },
   {
     label: 'Time Card',
@@ -87,6 +54,5 @@ export const navModules = [
     icon: 'ri-timer-line',
     parent: '',
     hasChildren: false,
-    children: ''
   },
 ];
