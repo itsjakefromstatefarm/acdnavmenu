@@ -98,7 +98,6 @@ moduleElements.forEach(module => {
 $('.nav').on('click', function(e) {
   console.log($(this).data()[0]);
   const { id, hasChildren } = $(this).data()[0];
-  $(`#${id}`).toggleClass(liActiveClass).siblings().removeClass(liActiveClass);
   if ( hasChildren ) {
     $(`#${id}-children`).toggleClass('hidden');
     $(`#${id}-chevron`).toggleClass('rotate-180');
