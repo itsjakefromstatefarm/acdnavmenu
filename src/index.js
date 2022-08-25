@@ -4,6 +4,7 @@ import { navModules } from "../helpers/exampleData";
 const _ = require('lodash/collection');
 
 const liClass = 'nav grid grid-cols-6 h-14 rounded-xl w-full items-center p-3 hover:bg-indigo-800 hover:cursor-pointer';
+const liActiveClass = 'bg-indigo-800';
 const iClass = 'text-white text-xl col-span-1 pointer-events-none justify-self-center';
 const pClass = 'text-white font-[Poppins] col-span-4 pointer-events-none';
 
@@ -97,12 +98,9 @@ moduleElements.forEach(module => {
 $('.nav').on('click', function(e) {
   console.log($(this).data()[0]);
   const { id, hasChildren } = $(this).data()[0];
+  $(`#${id}`).toggleClass(liActiveClass).siblings().removeClass(liActiveClass);
   if ( hasChildren ) {
     $(`#${id}-children`).toggleClass('hidden');
-    // const chevronClass = $(`#${id}-chevron`).attr('class');
-    // const classToRemove = chevronClass.includes('ri-arrow-down-s-line') ? 'ri-arrow-down-s-line' : 'ri-arrow-up-s-line';
-    // const classToAdd = classToRemove === 'ri-arrow-down-s-line' ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line';
-    // $(`#${id}-chevron`).removeClass(classToRemove).addClass(classToAdd);
     $(`#${id}-chevron`).toggleClass('rotate-180');
   }
 });
