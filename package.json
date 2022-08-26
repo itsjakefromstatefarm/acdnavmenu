@@ -1,9 +1,9 @@
 {
-  "name": "js-dev-environment",
-  "version": "2.0.0",
-  "author": "jeremy@integratingmagic.io",
+  "name": "acdnavmenu",
+  "version": "1.0.0",
+  "author": "jjohnson@angelcitydata.com",
   "license": "ISC",
-  "description": "a generic development environment for developing JS in FileMaker",
+  "description": "A JavaScript powered navigation widget for FileMaker-based systems.",
   "scripts": {
     "start": "parcel index.html  --no-source-maps",
     "browserslist": "> 0.5%, last 2 versions, not dead",
