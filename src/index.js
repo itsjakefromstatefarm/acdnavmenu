@@ -3,7 +3,7 @@ import { getModules, buildElement } from "../helpers/helpers";
 import { navModules } from "../helpers/exampleData";
 const _ = require('lodash/collection');
 
-const liClass = 'nav grid grid-cols-6 h-14 rounded-xl w-full items-center p-3 hover:bg-indigo-800 hover:cursor-pointer select-none';
+const liClass = 'nav grid grid-cols-6 h-14 rounded-xl w-full items-center p-3 hover:bg-indigo-800 hover:cursor-pointer select-none relative overflow-hidden';
 const liActiveClass = 'bg-indigo-800';
 const iClass = 'text-white text-xl col-span-1 pointer-events-none justify-self-center select-none';
 const pClass = 'text-white font-[Poppins] col-span-4 pointer-events-none select-none';
@@ -18,11 +18,12 @@ window.loadNavigation = (json) => {
     const data = record.fieldData;
     const id = data.__kp_Module_ID;
     const label = data.ModuleName;
+    const camelCase = data.ModuleNameCamelCase__ct;
     const parent = data._kf_ParentModule_ID;
     const hasChildren = data.hasChildren__cn === 'true' ? true : false;
     const icon = data.Icon;
 
-    const recordObj = {icon, id, label, parent, hasChildren};
+    const recordObj = {camelCase, icon, id, label, parent, hasChildren};
     return recordObj;
   });
 
@@ -52,7 +53,7 @@ window.loadNavigation = (json) => {
   });
   
   const moduleElements = fmModules.map(el => {
-    const { label, id, icon, parent, hasChildren } = el;
+    const { label, camelCase, id, icon, parent, hasChildren } = el;
     
     const li = buildElement(
       '<li>', 
@@ -61,7 +62,9 @@ window.loadNavigation = (json) => {
         withClass: liClass,
         data: [
           {
+            'camelCase': camelCase,
             'id': id,
+            label: label,
             'parent': parent,
             'hasChildren': hasChildren,
           }
@@ -80,7 +83,7 @@ window.loadNavigation = (json) => {
     const p = buildElement(
       '<p>',
       {
-        withClass: `${pClass} ${parent && 'pl-16 text-indigo-200 text-sm'}`,
+        withClass: `${pClass} ${parent && 'pl-16 text-indigo-200 text-sm relative group'}`,
         text: label,
       }
     );
@@ -112,11 +115,13 @@ window.loadNavigation = (json) => {
 
   $('.nav').on('click', function(e) {
     console.log($(this).data()[0]);
-    const { id, hasChildren } = $(this).data()[0];
+    const { camelCase, label, id, hasChildren } = $(this).data()[0];
     if ( hasChildren ) {
       $(`#${id}-children`).toggleClass('hidden');
       $(`#${id}-chevron`).toggleClass('rotate-180');
     }
+
+    !hasChildren && FileMaker.PerformScript('GetNavigationClick', label);
   });
 
 };
